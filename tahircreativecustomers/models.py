@@ -6,8 +6,8 @@ import string
 
 class UserRecord(models.Model):
     Selling_Key = models.CharField(max_length=1000,blank=True,null=True)
-    Order_Revenue_Date = models.DateField(auto_now=True, auto_now_add=False)
-    Funds_Cleared_Date = models.DateField(auto_now=True, auto_now_add=False)
+    Order_Revenue_Date = models.DateField(auto_now=False, auto_now_add=False)
+    Funds_Cleared_Date = models.DateField(auto_now=False, auto_now_add=False)
     From = models.CharField(max_length=50)
     Percentage_For_Tahir = models.FloatField()
     Percentage_For_Sohail = models.FloatField()
@@ -17,13 +17,14 @@ class UserRecord(models.Model):
 
 
     def save(self, *args, **kwargs):
-        self.Selling_Key = self.WithoutRepeat(26)
+        if(self.Selling_Key is None):
+            self.Selling_Key = self.WithoutRepeat(26)
         print(self.Selling_Key)
         super(UserRecord, self).save(*args, **kwargs)
-    def WithoutRepeat(self,length):  
-        letters = string.ascii_lowercase # define the specific string  
-        # define the condition for random.sample() method  
-        result = ''.join((random.sample(letters, length)))   
-        return result 
+    def WithoutRepeat(self,length):
+        letters = string.ascii_lowercase # define the specific string
+        # define the condition for random.sample() method
+        result = ''.join((random.sample(letters, length)))
+        return result
     def __str__(self):
         return self.From
