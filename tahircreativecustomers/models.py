@@ -27,4 +27,3 @@ class UserRecord(models.Model):
         return result 
     def __str__(self):
         return self.From
-    
