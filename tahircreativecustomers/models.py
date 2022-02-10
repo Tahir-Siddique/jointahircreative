@@ -45,8 +45,8 @@ class Order(models.Model):
     requirments = models.CharField(max_length=250)
     currency = models.CharField(max_length=10,blank=True)
     options = models.ManyToManyField(Option,default=None)
-    slug = models.SlugField(null=True,blank=True,)
-    
+    slug = models.SlugField(null=True,blank=True)
+    status = models.CharField(max_length=50,null=True,blank=True)
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)
