@@ -250,7 +250,11 @@ img{
                 {% endfor %}
               </ul>
             </div>
-      
+            {% if details.video %}
+            <div>
+                Drive Link : <a href="{{ details.video }}" target="blank"></a>
+            </div>
+            {% endif %}
       
           </div>
         </div>

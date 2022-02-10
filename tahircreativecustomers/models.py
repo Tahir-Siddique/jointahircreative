@@ -39,6 +39,7 @@ class Option(models.Model):
 class Order(models.Model):
     user_record = models.ForeignKey(UserRecord, on_delete=models.CASCADE)
     title = models.CharField(max_length=50,blank=True,null=True)
+    video = models.CharField(max_length=900,blank=True,null=True)
     amount = models.FloatField()
     days = models.IntegerField(blank=True,null=True)
     requirments = models.CharField(max_length=250)
