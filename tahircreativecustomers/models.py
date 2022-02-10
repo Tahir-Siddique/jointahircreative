@@ -1,7 +1,7 @@
 from django.db import models
-from django.forms import DateField
 import random
 import string
+from django.template.defaultfilters import slugify
 # Create your models here.
 
 class UserRecord(models.Model):
@@ -28,3 +28,26 @@ class UserRecord(models.Model):
         return result
     def __str__(self):
         return self.From
+
+class Options(models.Model):
+    title = models.CharField(max_length=250,blank=True,null=True)
+    included = models.CharField(max_length=250,blank=True,null=True)
+    def __str__(self):
+        return self.title
+    
+class Order(models.Model):
+    user_record = models.ForeignKey(UserRecord, on_delete=models.CASCADE)
+    title = models.CharField(max_length=50,blank=True,null=True)
+    amount = models.FloatField()
+    days = models.IntegerField(blank=True,null=True)
+    requirments = models.CharField(max_length=250)
+    options = models.ManyToManyField(Options,blank=True,null=True)
+    slug = models.SlugField(null=True,blank=True,)
+    
+    
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.title)
+        super(Order, self).save(*args, **kwargs)
+        
+    def __str__(self):
+        return self.title

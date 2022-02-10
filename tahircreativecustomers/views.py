@@ -1,6 +1,8 @@
+from contextlib import nullcontext
 from django.http import JsonResponse
+from django.shortcuts import render
 
-from .models import UserRecord
+from .models import Order, UserRecord
 
 # Create your views here.
 
@@ -13,6 +15,12 @@ def isUserBlocked(request,key):
 
             "success" : status.count(),
             "isBlocked":isBlocked
+        })
+def project_details(request,slug):
+    details = Order.objects.filter(slug=slug).first()
+    return render(request,"tahircreativecustomers/details.html",{
+
+            "details" : details
         })
 
 def error(request):
