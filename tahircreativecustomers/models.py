@@ -41,7 +41,7 @@ class Order(models.Model):
     amount = models.FloatField()
     days = models.IntegerField(blank=True,null=True)
     requirments = models.CharField(max_length=250)
-    options = models.ManyToManyField(Options,blank=True)
+    options = models.ManyToManyField(Options,default=None)
     slug = models.SlugField(null=True,blank=True,)
     
     
