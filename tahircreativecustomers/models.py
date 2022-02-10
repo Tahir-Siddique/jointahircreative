@@ -1,3 +1,4 @@
+from locale import currency
 from django.db import models
 import random
 import string
@@ -29,7 +30,7 @@ class UserRecord(models.Model):
     def __str__(self):
         return self.From
 
-class Options(models.Model):
+class Option(models.Model):
     title = models.CharField(max_length=250,blank=True,null=True)
     included = models.CharField(max_length=250,blank=True,null=True)
     def __str__(self):
@@ -41,7 +42,8 @@ class Order(models.Model):
     amount = models.FloatField()
     days = models.IntegerField(blank=True,null=True)
     requirments = models.CharField(max_length=250)
-    options = models.ManyToManyField(Options,default=None)
+    currency = models.CharField(max_length=10,blank=True)
+    options = models.ManyToManyField(Option,default=None)
     slug = models.SlugField(null=True,blank=True,)
     
     
