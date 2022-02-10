@@ -47,6 +47,7 @@ class Order(models.Model):
     options = models.ManyToManyField(Option,default=None)
     slug = models.SlugField(null=True,blank=True)
     status = models.CharField(max_length=50,null=True,blank=True)
+    visible = models.BooleanField(default='False')
     
     def save(self, *args, **kwargs):
         self.slug = slugify(self.title)

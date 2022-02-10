@@ -1,6 +1,6 @@
 from contextlib import nullcontext
 from django.http import JsonResponse
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 
 from .models import Order, UserRecord
 
@@ -20,10 +20,13 @@ def landing(request):
     return render(request,"tahircreativecustomers/landing.html",{})
 def project_details(request,slug):
     details = Order.objects.filter(slug=slug).first()
-    return render(request,"tahircreativecustomers/details.html",{
+    if details.visible == True:
+        return render(request,"tahircreativecustomers/details.html",{
 
-            "details" : details
-        })
+                "details" : details
+            })
+    else:
+        redirect("/")
 
 def error(request):
     return JsonResponse({"error":"Provide a Selling key"})
