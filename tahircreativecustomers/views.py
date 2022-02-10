@@ -16,6 +16,8 @@ def isUserBlocked(request,key):
             "success" : status.count(),
             "isBlocked":isBlocked
         })
+def landing(request):
+    return render(request,"tahircreativecustomers/landing.html",{})
 def project_details(request,slug):
     details = Order.objects.filter(slug=slug).first()
     return render(request,"tahircreativecustomers/details.html",{
