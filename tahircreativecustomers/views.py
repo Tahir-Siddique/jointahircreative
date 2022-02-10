@@ -26,7 +26,7 @@ def project_details(request,slug):
                 "details" : details
             })
     else:
-        redirect("/")
+        return redirect("/")
 
 def error(request):
     return JsonResponse({"error":"Provide a Selling key"})
