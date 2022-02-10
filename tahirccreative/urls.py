@@ -5,7 +5,7 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
+    path('', admin.site.urls),
     path('authenticatecustomer/', include("tahircreativecustomers.urls")),
-    path('admin/', admin.site.urls),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
